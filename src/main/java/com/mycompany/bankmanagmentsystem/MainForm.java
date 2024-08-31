@@ -4,6 +4,7 @@
  */
 package com.mycompany.bankmanagmentsystem;
 
+
 import javax.swing.JOptionPane;
 
 /**
@@ -162,6 +163,11 @@ public class MainForm extends javax.swing.JFrame {
                         // Convert the input string to a double
                         amountToBeAdded = Double.parseDouble(input);
                         // Use the double value (e.g., print it)
+                         if (amountToBeAdded % 100 != 0) {
+                            JOptionPane.showMessageDialog(null, "Invalid input. Deposit input must be divisble by 100.", "Error", JOptionPane.ERROR_MESSAGE);
+                         return;   
+                        }
+                        
                         
                     } catch (NumberFormatException e) {
                          // This catch block may never be reached due to the prior regex check
@@ -180,7 +186,7 @@ public class MainForm extends javax.swing.JFrame {
         if (result.contains("successfully")){
             JOptionPane.showMessageDialog(null, result, "WITHDRAW", JOptionPane.INFORMATION_MESSAGE);
             //set the textlabel to show updated acocunt balance 
-            accountBalanceLabel.setText(Double.toString(controller.loggedInAccount.getAccountBalance()));
+              accountBalanceLabel.setText(String.format("%,.0f", controller.loggedInAccount.getAccountBalance()));
             
         }else JOptionPane.showMessageDialog(null, result, "WITHDRAW", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -215,14 +221,15 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:   
         double amountToBeDeducted = 0;
         String input = JOptionPane.showInputDialog(null, "Enter an ammount:", "Input", JOptionPane.QUESTION_MESSAGE);
-            if (input.length() < 3){         //checks if the input was 3 digits or more
-                JOptionPane.showMessageDialog(null, "Invalid input. Withdraw input must be divisble by 100.", "Error", JOptionPane.ERROR_MESSAGE);
-                return ; 
-            }
+          
            
 
             // Check if the user clicked "Cancel" or closed the dialog
             if (input != null) {
+                if (input.length() < 3){         //checks if the input was 3 digits or more
+                JOptionPane.showMessageDialog(null, "Invalid input. Withdraw input must be divisble by 100.", "Error", JOptionPane.ERROR_MESSAGE);
+                return ; 
+            }
                  // Validate that the input is a number
                 if (input.matches("[-+]?\\d*\\.?\\d+")) {
                     try {
@@ -249,7 +256,7 @@ public class MainForm extends javax.swing.JFrame {
         if (result.contains("successfully")){
             JOptionPane.showMessageDialog(null, result, "WITHDRAW", JOptionPane.INFORMATION_MESSAGE);
             //set the textlabel to show updated acocunt balance 
-            accountBalanceLabel.setText(Double.toString(controller.loggedInAccount.getAccountBalance()));
+              accountBalanceLabel.setText(String.format("%,.0f", controller.loggedInAccount.getAccountBalance()));
             
         }else JOptionPane.showMessageDialog(null, result, "WITHDRAW", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -257,7 +264,9 @@ public class MainForm extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         controller.logInAccount(ID);
-        accountBalanceLabel.setText(Double.toString(controller.loggedInAccount.getAccountBalance()));
+       
+        
+        accountBalanceLabel.setText(String.format("%,.0f", controller.loggedInAccount.getAccountBalance()));
         
         //check if PIN is default, if yes must change the PIN
         if(controller.loggedInAccount.getPIN() == 123456){

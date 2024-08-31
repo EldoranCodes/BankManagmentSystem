@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -65,20 +66,18 @@ public class Controller {
 
                     try (Statement stmt = conn.createStatement()) {
                         stmt.execute(createAccountTable);
-                        System.out.println("Accounts table created successfully.");
-
                         stmt.execute(createTransacTable);
-                        System.out.println("TransactionHistory table created successfully.");
-
+                       
                     } catch (SQLException e) {
                         System.out.println(e.getMessage());
+                        JOptionPane.showMessageDialog(null, e.getMessage(),"Error in Database",JOptionPane.ERROR_MESSAGE);
                     }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }           
         } else {
-            System.out.println("Database already exists!");
+//            System.out.println("Database already exists!");
         }
     }
     
@@ -143,9 +142,9 @@ public class Controller {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Account updated successfully!");
+//                System.out.println("Account updated successfully!");
             } else {
-                System.out.println("No account found with the provided ID.");
+                JOptionPane.showMessageDialog(null,"No account found with the provided ID","Error",JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (SQLException ex) {
@@ -267,10 +266,11 @@ public class Controller {
               loggedInAccount.setMiddleName(rs.getString("middle_name"));
               loggedInAccount.setEmailAddress(rs.getString("email"));
               loggedInAccount.setPIN(rs.getInt("PIN"));
-              System.out.println("Account has been Successfully set");
+//              System.out.println("Account has been Successfully set");
           } else {
               // Handle case where no account with the given ID exists
-              System.out.println("No account found with ID: " + id);
+//              System.out.println("No account found with ID: " + id);
+              
           }
 
       } catch (SQLException ex) {
