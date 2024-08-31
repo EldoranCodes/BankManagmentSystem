@@ -35,6 +35,3 @@
 - **Swing for GUI Development:**
   - Created a user-friendly graphical interface using Swing, enhancing the application’s usability.
   - Worked with components like `JOptionPane`, `JButton`, and `JLabel` to build an interactive UI.
-- **Version Control:**
-  - Gained experience using GitHub for version control, including committing changes, branching, and writing meaningful commit messages.
-  - Created a GitHub repository to showcase the project and track progress.
